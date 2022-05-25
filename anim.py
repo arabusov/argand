@@ -88,4 +88,5 @@ ani = animation.FuncAnimation(
     fig, animate, len(y1), interval=dM3pi*1000, blit=True)
 writervideo = animation.FFMpegWriter(fps=60)
 #ani.save("argand.mp4", writer=writervideo)
-plt.show()
+ani.save("argand.gif", dpi=90)
+#plt.show()
