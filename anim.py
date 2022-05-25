@@ -48,7 +48,7 @@ from collections import deque
 from bw import bw, mpi, mtau, Fa1a1p
 import sys
 BW = np.vectorize (bw)
-dM3pi = 0.003
+dM3pi = 0.005
 dM2pi = 0.01
 m3pis = np.arange (3*mpi, mtau, dM3pi)
     #BW (m3pi**2, 1.260, 0.300, 1)*
@@ -60,8 +60,8 @@ ampl = np.array ([ Fa1a1p (m3pi**2)*
 # Unpack results
 x1 = np.array ([np.real (vec) for vec in ampl])
 y1 = np.array ([np.imag (vec) for vec in ampl])
-xmax = 24
-ymax = 24
+xmax = 13
+ymax = 13
 
 fig = plt.figure(figsize=(10, 10))
 # Here you can adjust the size of the window and the limits.
