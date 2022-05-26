@@ -39,23 +39,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from numpy import sin, cos
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from collections import deque
+import argparse
 
-from bw import bw, mpi, mtau, Fa1a1p
-import sys
-BW = np.vectorize (bw)
-dM3pi = 0.005
-dM2pi = 0.01
-m3pis = np.arange (3*mpi, mtau, dM3pi)
-    #BW (m3pi**2, 1.260, 0.300, 1)*
-ampl = np.array ([ Fa1a1p (m3pi**2)*
-    BW (np.arange (2*mpi, m3pi, dM2pi)**2, 0.770, 0.150, 1)
-    for m3pi in m3pis])
-
+from a1rho import ampl, dM3pi, m3pis
 
 # Unpack results
 x1 = np.array ([np.real (vec) for vec in ampl])
@@ -86,7 +76,13 @@ def animate(i):
 
 ani = animation.FuncAnimation(
     fig, animate, len(y1), interval=dM3pi*1000, blit=True)
-writervideo = animation.FFMpegWriter(fps=60)
+parser = argparse.ArgumentParser ()
+parser.add_argument ("--output", help="Output file to save animation")
+args = parser.parse_args ()
+
+#writervideo = animation.FFMpegWriter(fps=60)
 #ani.save("argand.mp4", writer=writervideo)
-ani.save("argand.gif", dpi=90)
-#plt.show()
+if args.output is not None:
+    ani.save(args.output, dpi=90)
+else:
+    plt.show()
