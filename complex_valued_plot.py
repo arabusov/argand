@@ -25,9 +25,9 @@ def complex_valued_plot(cmplxarray):
     # Actual plot
 
     fig, ax = plt.subplots(figsize=(9,8))
-    pc1 = ax.imshow(phis, cmap='hsv', extent=[3*mpi,mtau, 2*mpi, mtau])
+    pc1 = ax.imshow(phis, cmap='hsv', extent=[3*mpi,mtau, 2*mpi, mtau-mpi])
     # Plotting the modulus array as the 'value' part
-    ax.imshow(black, extent=[3*mpi,mtau, 2*mpi, mtau])
+    ax.imshow(black, extent=[3*mpi,mtau, 2*mpi, mtau-mpi])
     ax.set (xlabel='$m(3\pi)$ [GeV]', ylabel='$m(2\pi)$ [GeV]')
     cbar1 = fig.colorbar (pc1, ax=ax)
     cbar1.ax.set_ylabel ('Phase [deg]', rotation=270)
