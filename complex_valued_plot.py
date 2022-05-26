@@ -19,7 +19,8 @@ def complex_valued_plot(cmplxarray):
     # Creating the black cover layer
 
     black = np.full((*cmplxarray.shape, 4), 0.)
-    black[:,:,-1] = np.abs(cmplxarray) / np.nanmax (np.abs(cmplxarray))
+    intensity = np.abs (cmplxarray)
+    black[:,:,-1] = np.abs(intensity) / np.nanmax (np.abs(intensity))
     black[:,:,-1] = 1 - black[:,:,-1]
     phis = np.angle (cmplxarray, deg=True)
     # Actual plot
