@@ -80,9 +80,7 @@ parser = argparse.ArgumentParser ()
 parser.add_argument ("--output", help="Output file to save animation")
 args = parser.parse_args ()
 
-#writervideo = animation.FFMpegWriter(fps=60)
-#ani.save("argand.mp4", writer=writervideo)
 if args.output is not None:
-    ani.save(args.output, dpi=90)
+    ani.save(args.output, dpi=90, fps=30)
 else:
     plt.show()
