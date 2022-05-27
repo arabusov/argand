@@ -16,7 +16,12 @@ fmt='{:.3f}'
 M = 0.770
 G = 0.150
 l = 1
-pole_text = '('+fmt.format (M) + ' $- i$' + fmt.format (G)+') [GeV]'
+pole_text = '('+fmt.format (M) + ' - i' + fmt.format (G)+') [GeV]'
+
+scale = 2
+
+M *= scale
+G *= scale
 
 def bw (s, m, g, l):
     mp = 4*mpi**2;
@@ -34,7 +39,7 @@ class BreitWigner (Scene ):
     def construct(self):
 
         # Complex map
-        c_grid = ComplexPlane((-2,2),(-1, 1))
+        c_grid = ComplexPlane((-2*scale,2*scale),(-1*scale, 1*scale))
         moving_c_grid = c_grid.copy()
         moving_c_grid.prepare_for_nonlinear_transform()
         c_grid.set_stroke(BLUE_E, 1)
@@ -44,10 +49,10 @@ class BreitWigner (Scene ):
         """)
         complex_map_words.to_corner(UR)
         complex_map_words.set_stroke(BLACK, 5, background=True)
-        pole=Dot (c_grid.n2p (complex (M, -G)), color=YELLOW, radius=0.01)
-        pole_title=Text('aaa').next_to(pole, DOWN)
+        pole=Dot (c_grid.n2p (complex (M, -G)), color=YELLOW, radius=0.1)
+        pole_title=Text(pole_text).next_to(pole, DOWN)
 
-        self.add (pole, pole_title)
+        self.add (pole)
         self.play(
             Write(c_grid, run_time=3),
             FadeIn(moving_c_grid),
