@@ -39,16 +39,18 @@ ampl = np.array ([ Fa1a1p (m3pi**2, 1.275)*
 def magnitude_1D ():
     qqs = m3pis**2
     fig, ax = plt.subplots(1, 2, figsize=(18,8))
-    FF=np.vectorize (Fa1a1p)
-    a1masses = [1.200, 1.260, 1.333, 1.4]
-    for a1mass in a1masses:
-        sample = FF (qqs, a1mass)
+    FF=np.vectorize (bw)
+    a1widths = [0.150, 0.3, 0.4, 0.6]
+    for a1width in a1widths:
+        sample = FF (qqs, 1.260, a1width, 1)
+        sample /= np.nanmax (np.abs (sample))
         ax[0].plot (m3pis, np.abs (sample), lw=2,
-                label='$m(\\text{a}_1)='+str(int(1000*a1mass))+'$ [GeV]')
+                label='$\\Gamma(\\text{a}_1)='+str(int(1000*a1width))+'$ [GeV]')
         ax[1].plot (m3pis, np.angle (sample, True), lw=2)
     ax[0].grid(True)
     ax[0].legend ()
-    ax[0].set (xlabel='$m(3\pi)$ [GeV]', ylabel='$\\text{a}_1(1260)$ magnitude')
+    ax[0].set (xlabel='$m(3\pi)$ [GeV]', ylabel='$\\text{a}_1(1260)$ magnitude/max magnitude')
+    ax[0].set (title='$m[\\text{a}_1(1260)]=1.26$ [GeV]')
     ax[1].set (xlabel='$m(3\pi)$ [GeV]', ylabel='$\\text{a}_1(1260)$ phase [deg]')
     ax[1].grid(True)
 
