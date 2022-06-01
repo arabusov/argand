@@ -23,12 +23,38 @@
 
 from bw import bw, mpi, mtau, Fa1a1p
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib as mp
+from utils import conf_mlp
 
 BW = np.vectorize (bw)
 dM3pi = 0.005
 dM2pi = 0.01
 m3pis = np.arange (3*mpi, mtau, dM3pi)
     #BW (m3pi**2, 1.260, 0.300, 1)*
-ampl = np.array ([ Fa1a1p (m3pi**2)*
+ampl = np.array ([ Fa1a1p (m3pi**2, 1.275)*
     BW (np.arange (2*mpi, m3pi, dM2pi)**2, 0.770, 0.150, 1)
     for m3pi in m3pis])
+
+def magnitude_1D ():
+    qqs = m3pis**2
+    fig, ax = plt.subplots(1, 2, figsize=(18,8))
+    FF=np.vectorize (Fa1a1p)
+    a1masses = [1.200, 1.260, 1.333, 1.4]
+    for a1mass in a1masses:
+        sample = FF (qqs, a1mass)
+        ax[0].plot (m3pis, np.abs (sample), lw=2,
+                label='$m(\\text{a}_1)='+str(int(1000*a1mass))+'$ [GeV]')
+        ax[1].plot (m3pis, np.angle (sample, True), lw=2)
+    ax[0].grid(True)
+    ax[0].legend ()
+    ax[0].set (xlabel='$m(3\pi)$ [GeV]', ylabel='$\\text{a}_1(1260)$ magnitude')
+    ax[1].set (xlabel='$m(3\pi)$ [GeV]', ylabel='$\\text{a}_1(1260)$ phase [deg]')
+    ax[1].grid(True)
+
+if __name__=="__main__":
+    conf_mlp (font_size=14)
+    magnitude_1D ()
+    plt.tight_layout ()
+    plt.show ()
+    plt.close ()

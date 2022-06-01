@@ -6,14 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mp
 
 from a1rho import m3pis, mtau, mpi, dM2pi, ampl
-
-from tex_preamble import TeX_preamble
-def conf_mlp (font_size=14, font_family="serif"):
-    mp.rc("font",  **dict(size=font_size,
-        family=font_family,serif=["Computer Modern"]))
-    mp.rc("lines", **dict(linewidth=0.5))
-    mp.rc("text", usetex=True)
-    mp.rc("text.latex",preamble=TeX_preamble)
+from utils import conf_mlp
 
 def complex_valued_plot(cmplxarray):
     # Creating the black cover layer

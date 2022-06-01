@@ -102,9 +102,8 @@ def wga1 (qq):
         gkst = np.sqrt ((qq-mk1sq)*(qq-mk2sq))/(2.*qq);
     return c3pi*(wga1c (qq) + wga1n (qq)) + ckst*gkst;
 
-def Fa1a1p (qq):
+def Fa1a1p (qq, ma1=1.275):
     c3pi = 0.2384**2;
-    ma1 = 1.275;
     ma1sq = ma1**2
     ga1 = 0.700;
     ma1p = 1.461;
